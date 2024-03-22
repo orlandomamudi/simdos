@@ -30,14 +30,20 @@ Route::group(['middleware' => 'guest'], function() {
 
 // Untuk Semua Role
 Route::group(['middleware' => ['auth', 'checkrole:1,2,3']], function() {
-    Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/redirect', [RedirectController::class, 'cek']);
 });
 
 // Untuk Staff
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
-    Route::get('/staff', [StaffController::class, 'index']);
+    Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
+    Route::get('/daftar-dosen', [StaffController::class, 'list'])->name('staff.dosen');
+    Route::get('/daftar-user', [StaffController::class, 'user'])->name('staff.user');
+    Route::get('/tambah-user', [StaffController::class, 'create'])->name('staff.create');
+    Route::post('/store', [StaffController::class, 'store'])->name('staff.store');
 });
+
+
 
 // Untuk Dosen
 Route::group(['middleware' => ['auth', 'checkrole:2']], function() {
