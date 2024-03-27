@@ -98,6 +98,96 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    {{-- <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Gelar Akademik</label>
+                                            <div class="position-relative">
+                                                <input type="text" name="gelar" class="form-control"
+                                                    placeholder="Gelar Akademik" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                            </div>
+                                            @error('gelar')
+                                                <small>*{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Bidang Keahlian</label>
+                                            <div class="position-relative">
+                                                <input type="text" name="bidang" class="form-control"
+                                                    placeholder="Bidang Keahlian" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                            </div>
+                                            @error('bidang')
+                                                <small>*{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Riwayat Pendidikan</label>
+                                            <div class="position-relative">
+                                                <input type="text" name="riwayat" class="form-control"
+                                                    placeholder="Riwayat Pendidikan" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                            </div>
+                                            @error('riwayat')
+                                                <small>*{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Pengalaman Mengajar</label>
+                                            <div class="position-relative">
+                                                <input type="text" name="pengalaman" class="form-control"
+                                                    placeholder="Pengalaman Mengajar" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                            </div>
+                                            @error('pengalaman')
+                                                <small>*{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Publikasi Ilmiah</label>
+                                            <div class="position-relative">
+                                                <input type="text" name="publikasi" class="form-control"
+                                                    placeholder="Publikasi Ilmiah" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                            </div>
+                                            @error('publikasi')
+                                                <small>*{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="form-group has-icon-left">
+                                            <label for="first-name-icon">Aktivitas Penelitian</label>
+                                            <div class="position-relative">
+                                                <input type="text" name="aktivitas" class="form-control"
+                                                    placeholder="Aktivitas Penelitian" id="first-name-icon">
+                                                <div class="form-control-icon">
+                                                    <i class="bi bi-person"></i>
+                                                </div>
+                                            </div>
+                                            @error('aktivitas')
+                                                <small>*{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                    </div> --}}
                                     <div class="col-12 d-flex justify-content-end">
                                         <button type="submit" class="btn btn-primary me-1 mb-1">Submit</button>
                                         <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>

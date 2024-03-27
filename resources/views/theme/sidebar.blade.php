@@ -2,15 +2,55 @@
     <ul class="menu">
         <li class="sidebar-title">Menu</li>
 
-        <li class="sidebar-item {{ request()->is('staff*') ? 'active' : '' }}">
-            <a href="{{route('staff.index')}}" class='sidebar-link'>
+        @if (Auth::user()->role_id === 1)
+            <li class="sidebar-item {{ request()->is('staff') ? 'active' : '' }}">
+                <a href="{{route('staff.index')}}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        @elseif (Auth::user()->role_id === 2)
+            <li class="sidebar-item {{ request()->is('dosen') ? 'active' : '' }}">
+                <a href="{{route('dosen.index')}}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        @else
+            <li class="sidebar-item {{ request()->is('pimpinan') ? 'active' : '' }}">
+                <a href="{{route('pimpinan.index')}}" class='sidebar-link'>
+                    <i class="bi bi-grid-fill"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+        @endif
+
+        @if (Auth::user()->role_id === 2)
+        <li class="sidebar-item {{ request()->is('biodata*') ? 'active' : '' }}">
+            <a href="{{ url('biodata/'. Auth::user()->id) }}" class='sidebar-link'>
                 <i class="bi bi-grid-fill"></i>
-                <span>Dashboard</span>
+                <span>Biodata</span>
             </a>
         </li>
+        @endif
+        @if (Auth::user()->role_id === 2)
+        <li class="sidebar-item {{ request()->is('berkas*') ? 'active' : '' }}">
+            <a href="{{ route('dosen.berkas') }}" class='sidebar-link'>
+                <i class="bi bi-grid-fill"></i>
+                <span>Berkas</span>
+            </a>
+        </li>
+        @endif
         @if (Auth::user()->role_id === 1)
         <li class="sidebar-item {{ request()->is('daftar-dosen*') ? 'active' : '' }}">
-            <a href="{{ route('staff.dosen') }}" class='sidebar-link'>
+            <a href="{{ url('daftar-dosen') }}" class='sidebar-link'>
+                <i class="bi bi-people-fill"></i>
+                <span>Daftar Dosen</span>
+            </a>
+        </li>
+        @elseif (Auth::user()->role_id === 3)
+        <li class="sidebar-item {{ request()->is('daftar-dosen*') ? 'active' : '' }}">
+            <a href="{{ url('daftar-dosen') }}" class='sidebar-link'>
                 <i class="bi bi-people-fill"></i>
                 <span>Daftar Dosen</span>
             </a>
@@ -19,10 +59,33 @@
         @if (Auth::user()->role_id === 1)
         <li class="sidebar-item {{ request()->is('daftar-user*') ? 'active' : '' }}">
             <a href="{{ route('staff.user') }}" class='sidebar-link'>
-                <i class="bi bi-person-fill"></i>
+                <i class="bi bi-people-fill"></i>
                 <span>Daftar User</span>
             </a>
         </li>
+        @endif
+
+        @if (Auth::user()->role_id === 1)
+            <li class="sidebar-item {{ request()->is('staff/profile') ? 'active' : '' }}">
+                <a href="{{route('staff.profile')}}" class='sidebar-link'>
+                    <i class="bi bi-person-fill"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+        @elseif (Auth::user()->role_id === 2)
+            <li class="sidebar-item {{ request()->is('dosen/profile') ? 'active' : '' }}">
+                <a href="{{route('dosen.profile')}}" class='sidebar-link'>
+                    <i class="bi bi-person-fill"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
+        @else
+            <li class="sidebar-item {{ request()->is('pimpinan/profile') ? 'active' : '' }}">
+                <a href="{{route('pimpinan.profile')}}" class='sidebar-link'>
+                    <i class="bi bi-person-fill"></i>
+                    <span>Profile</span>
+                </a>
+            </li>
         @endif
         {{-- <li
           class="sidebar-item  has-sub">

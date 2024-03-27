@@ -103,6 +103,13 @@
     <script src="{{ asset('template/assets/extensions/simple-datatables/umd/simple-datatables.js') }}"></script>
     <script src="{{ asset('template/assets/static/js/pages/simple-datatables.js') }}"></script>
 
+    <script>
+        var table = $("#table2").DataTable({
+            "ordering": false,
+            "searching": false
+        });
+    </script>
+
 </body>
 
 </html>

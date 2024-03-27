@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'role_id',
         'image',
+        'progress_bar',
         'password',
     ];
 
@@ -47,5 +48,13 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function biodata() {
+        return $this->hasMany(Biodata::class, 'user_id', 'id');
+    }
+
+    public function berkas() {
+        return $this->hasOne(Berkas::class);
     }
 }
