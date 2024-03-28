@@ -43,7 +43,7 @@
         @endif
         @if (Auth::user()->role_id === 1)
         <li class="sidebar-item {{ request()->is('daftar-dosen*') ? 'active' : '' }}">
-            <a href="{{ url('daftar-dosen') }}" class='sidebar-link'>
+            <a href="{{ route('staff.dosen') }}" class='sidebar-link'>
                 <i class="bi bi-people-fill"></i>
                 <span>Daftar Dosen</span>
             </a>
