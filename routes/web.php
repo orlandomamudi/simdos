@@ -37,11 +37,11 @@ Route::group(['middleware' => ['auth', 'checkrole:1,2,3']], function() {
 // Untuk Staff
 Route::group(['middleware' => ['auth', 'checkrole:1']], function() {
     Route::get('/staff', [StaffController::class, 'index'])->name('staff.index');
-    Route::get('staff/daftar-dosen', [StaffController::class, 'list'])->name('staff.dosen');
+    Route::get('/staff/daftar-dosen', [StaffController::class, 'list'])->name('staff.dosen');
     Route::get('/daftar-user', [StaffController::class, 'user'])->name('staff.user');
     Route::get('/tambah-user', [StaffController::class, 'create'])->name('staff.create');
     Route::post('/store', [StaffController::class, 'store'])->name('staff.store');
-    Route::get('/daftar-dosen/{user}/detail', [StaffController::class, 'detail']);
+    Route::get('/staff/daftar-dosen/{user}/detail', [StaffController::class, 'detail']);
     Route::get('/daftar-dosen/{user}/detail/cetak', [StaffController::class, 'cetak']);
     Route::get('/staff/profile', [StaffController::class, 'profile'])->name('staff.profile');
     Route::put('/staff/profile/update/{user}', [StaffController::class, 'updateProfile']);

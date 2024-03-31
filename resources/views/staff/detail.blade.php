@@ -76,7 +76,7 @@
                                     {{-- {{dd($user)}} --}}
                                     @foreach ($user->biodata as $item)
                                         <tr>
-                                            <td>{{ $item->gelar_akademik ? $item->gelar_akademik : 'Data Belum Diupload' }}
+                                            <td>{{ $item->gelar_akademik  ? $item->gelar_akademik : 'Data Belum Diupload' }}
                                             </td>
                                             <td>{{ $item->bidang_keahlian ? $item->bidang_keahlian : 'Data Belum Diupload' }}
                                             </td>
@@ -111,7 +111,7 @@
                                             <td class="text-bold-500">Transkrip Pendidikan</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->transkrip_pendidikan) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal" data-bs-target="#modaltranskrippendidikan">
                                                     <i data-feather="eye"></i>
                                                     Lihat Berkas
@@ -122,7 +122,7 @@
                                             <td class="text-bold-500">Sertifikat Gelar Akademik</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->sertifikat_gelar_akademik) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal" data-bs-target="#modalsertifikat">
                                                     <i data-feather="eye"></i>
                                                     Lihat Berkas
@@ -133,7 +133,7 @@
                                             <td class="text-bold-500">Surat Keputusan Pengangkatan</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->surat_keputusan_pengangkatan) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal"
                                                     data-bs-target="#modalsuratkeputusanpengangkatan">
                                                     <i data-feather="eye"></i>
@@ -145,7 +145,7 @@
                                             <td class="text-bold-500">Publikasi Ilmiah</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->publikasi_ilmiah) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal" data-bs-target="#modalpublikasiilmiah">
                                                     <i data-feather="eye"></i>
                                                     Lihat Berkas
@@ -156,7 +156,7 @@
                                             <td class="text-bold-500">Kegiatan Pengembangan Diri</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->kegiatan_pengembangan_diri) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal" data-bs-target="#modalkegiatanpengembangandiri">
                                                     <i data-feather="eye"></i>
                                                     Lihat Berkas
@@ -167,7 +167,7 @@
                                             <td class="text-bold-500">Catatan Kinerja Mengajar</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->catatan_kinerja_mengajar) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal" data-bs-target="#modalcatatankinerjamengajar">
                                                     <i data-feather="eye"></i>
                                                     Lihat Berkas
@@ -178,7 +178,7 @@
                                             <td class="text-bold-500">Laporan Penelitian</td>
                                             <td>
                                                 <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
+                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill {{isset($user->berkas->laporan_penelitian) ? '' : 'disabled'}}"
                                                     data-bs-toggle="modal" data-bs-target="#modallaporanpenelitian">
                                                     <i data-feather="eye"></i>
                                                     Lihat Berkas

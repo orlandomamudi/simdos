@@ -47,7 +47,7 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <a href="{{ url('daftar-dosen/'.$dosen->id.'/detail') }}" class="btn icon icon-left btn-warning btn-sm rounded-pill"><i
+                                        <a href="{{ url('staff/daftar-dosen/'.$dosen->id.'/detail') }}" class="btn icon icon-left btn-warning btn-sm rounded-pill"><i
                                                 data-feather="eye"></i> Detail</a>
                                     </td>
                                 </tr>

@@ -54,7 +54,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->transkrip_pendidikan) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal" data-bs-target="#modaltranskrippendidikan">
                                                         <i data-feather="eye"></i>
                                                         Lihat Berkas
@@ -66,7 +67,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->sertifikat_gelar_akademik) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal" data-bs-target="#modalsertifikat">
                                                         <i data-feather="eye"></i>
                                                         Lihat Berkas
@@ -78,7 +80,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->surat_keputusan_pengangkatan) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalsuratkeputusanpengangkatan">
                                                         <i data-feather="eye"></i>
@@ -91,7 +94,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->publikasi_ilmiah) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalpublikasiilmiah">
                                                         <i data-feather="eye"></i>
@@ -104,7 +108,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->kegiatan_pengembangan_diri) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalkegiatanpengembangandiri">
                                                         <i data-feather="eye"></i>
@@ -117,7 +122,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->catatan_kinerja_mengajar) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modalcatatankinerjamengajar">
                                                         <i data-feather="eye"></i>
@@ -130,7 +136,8 @@
                                                 <td>
                                                     <button type="button"
                                                         class="btn icon icon-left btn-warning btn-sm rounded-pill
-                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}"
+                                                        {{ Auth::user()->progress_bar == 0 ? 'disabled' : '' }}
+                                                        {{isset(Auth::user()->berkas->laporan_penelitian) ? '' : 'disabled'}}"
                                                         data-bs-toggle="modal"
                                                         data-bs-target="#modallaporanpenelitian">
                                                         <i data-feather="eye"></i>
