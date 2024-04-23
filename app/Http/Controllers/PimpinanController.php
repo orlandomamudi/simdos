@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+// use Barryvdh\DomPDF\PDF;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -26,8 +28,24 @@ class PimpinanController extends Controller
     }
 
     public function detail($id) {
+        $detail = User::with('biodata')->where('id', '=', $id)->first();
+        $pendidikan_pengajaran = $detail->biodata()->whereNotNull('pendidikan_pengajaran')->get();
+        $pengabdian = $detail->biodata()->whereNotNull('pengabdian')->get();
+        $penunjang = $detail->biodata()->whereNotNull('penunjang')->get();
+        $gelar_akademik = $detail->biodata()->whereNotNull('gelar_akademik')->get();
+        $bidang_keahlian = $detail->biodata()->whereNotNull('bidang_keahlian')->get();
+        $riwayat_pendidikan = $detail->biodata()->whereNotNull('riwayat_pendidikan')->get();
+        $pengalaman_mengajar = $detail->biodata()->whereNotNull('pengalaman_mengajar')->get();
+        $publikasi_ilmiah = $detail->biodata()->whereNotNull('publikasi_ilmiah')->get();
+        $aktivitas_penelitian = $detail->biodata()->whereNotNull('aktivitas_penelitian')->get();
+        return view('pimpinan.detail', compact('detail', 'pendidikan_pengajaran', 'pengabdian', 'penunjang', 'gelar_akademik', 'bidang_keahlian', 'riwayat_pendidikan', 'pengalaman_mengajar', 'publikasi_ilmiah', 'aktivitas_penelitian'));
+    }
+
+    public function cetak($id) {
         $user = User::with('biodata', 'berkas')->where('id', '=', $id)->first();
-        return view('pimpinan.detail', compact('user'));
+
+        $pdf = PDF::loadview('theme.biodata_pdf', ['user' => $user]);
+        return $pdf->download($user->name . 'biodata.pdf');
     }
 
     public function profile() {

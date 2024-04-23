@@ -55,6 +55,6 @@ class User extends Authenticatable
     }
 
     public function berkas() {
-        return $this->hasOne(Berkas::class);
+        return $this->hasMany(Berkas::class, 'user_id', 'id');
     }
 }

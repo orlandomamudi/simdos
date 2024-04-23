@@ -32,8 +32,8 @@
                             <div class="d-flex justify-content-center align-items-center flex-column">
                                 <div>
                                     <img style="width: 200px" class="rounded-circle"
-                                        src="{{ $user->image ? asset('storage/photo-user/' . $user->image) : asset('template/assets/compiled/jpg/2.jpg') }}"
-                                        alt="{{ $user->image }}">
+                                        src="{{ $detail->image ? asset('storage/photo-user/' . $detail->image) : asset('template/assets/compiled/jpg/2.jpg') }}"
+                                        alt="{{ $detail->image }}">
                                 </div>
                                 {{-- {{ dd(Auth::user()->load('biodata')) }} --}}
                             </div>
@@ -44,16 +44,16 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="float-end">
-                                <a href="{{ url('daftar-dosen/' . $user->id . '/detail/cetak') }}"
+                                <a href="{{ url('pimpinan/daftar-dosen/' . $detail->id . '/detail/cetak') }}"
                                     class="btn btn-primary">cetak</a>
                             </div>
                             <div class="mb-3">
                                 <p class="text-muted mb-0"><strong>Nama Lengkap</strong></p>
-                                <h3>{{ $user->name }}</h3>
+                                <h3>{{ $detail->name }}</h3>
                             </div>
                             <div>
                                 <h6 class="text-muted mb-0">Email</h6>
-                                <h3>{{ $user->email }}</h3>
+                                <h3>{{ $detail->email }}</h3>
                             </div>
                         </div>
                     </div>
@@ -61,132 +61,268 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            <table class="table table-striped" id="table2">
-                                <thead>
-                                    <tr>
-                                        <th>Gelar Akademik</th>
-                                        <th>Bidang Keahlian</th>
-                                        <th>Riwayat Pendidikan</th>
-                                        <th>Pengalaman Mengajar</th>
-                                        <th>Publikasi Ilmiah</th>
-                                        <th>Aktivitas Penelitian</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- {{dd($user)}} --}}
-                                    @foreach ($user->biodata as $item)
-                                        <tr>
-                                            <td>{{ $item->gelar_akademik ? $item->gelar_akademik : 'Data Belum Diupload' }}
-                                            </td>
-                                            <td>{{ $item->bidang_keahlian ? $item->bidang_keahlian : 'Data Belum Diupload' }}
-                                            </td>
-                                            <td>{{ $item->riwayat_pendidikan ? $item->riwayat_pendidikan : 'Data Belum Diupload' }}
-                                            </td>
-                                            <td>{{ $item->pengalaman_mengajar ? $item->pengalaman_mengajar : 'Data Belum Diupload' }}
-                                            </td>
-                                            <td>{{ $item->publikasi_ilmiah ? $item->publikasi_ilmiah : 'Data Belum Diupload' }}
-                                            </td>
-                                            <td>{{ $item->aktivitas_penelitian ? $item->aktivitas_penelitian : 'Data Belum Diupload' }}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                            <div class="row">
+                                <div class="row mb-3">
+                                    <div class="col-3">
+                                        <h5 class="card-title">Riwayat Pendidikan</h5>
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Pendidikan & Pengajaran</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        {{-- {{dd($detail->biodata()->whereNotNull('pendidikan_pengajaran')->first()->pendidikan_pengajaran)}} --}}
+                                        @if (!empty($detail->biodata()->whereNotNull('pendidikan_pengajaran')->first()->pendidikan_pengajaran))
+                                            @foreach ($pendidikan_pengajaran as $item)
+                                                <p class="mb-0">{{ $item->pendidikan_pengajaran }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Pengabdian</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('pengabdian')->first()->pengabdian))
+                                            @foreach ($pengabdian as $item)
+                                                <p class="mb-0">{{ $item->pengabdian }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Penunjang</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('penunjang')->first()->penunjang))
+                                            @foreach ($penunjang as $item)
+                                                <p class="mb-0">{{ $item->penunjang }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Gelar Akademik</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('gelar_akademik')->first()->gelar_akademik))
+                                            @foreach ($gelar_akademik as $item)
+                                                <p class="mb-0">{{ $item->gelar_akademik }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Bidang Keahlian</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('bidang_keahlian')->first()->bidang_keahlian))
+                                            @foreach ($bidang_keahlian as $item)
+                                                <p class="mb-0">{{ $item->bidang_keahlian }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Pengalaman Mengajar</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('pengalaman_mengajar')->first()->pengalaman_mengajar))
+                                            @foreach ($pengalaman_mengajar as $item)
+                                                <p class="mb-0">{{ $item->pengalaman_mengajar }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Publikasi Ilmiah</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('publikasi_ilmiah')->first()->publikasi_ilmiah))
+                                            @foreach ($publikasi_ilmiah as $item)
+                                                <p class="mb-0">{{ $item->publikasi_ilmiah }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <div class="col-3">
+                                        <h6>Aktivitas Penelitian</h6>
+                                    </div>
+                                    <div class="col-1">
+                                        <h6>:</h6>
+                                    </div>
+                                    <div class="col-6">
+                                        @if (!empty($detail->biodata()->whereNotNull('aktivitas_penelitian')->first()->aktivitas_penelitian))
+                                            @foreach ($aktivitas_penelitian as $item)
+                                                <p class="mb-0">{{ $item->aktivitas_penelitian }}</p>
+                                            @endforeach
+                                        @else
+                                            <code>Data belum tersedia.</code>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-12">
                     <div class="card">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <table class="table table-lg">
-                                    <thead>
-                                        <tr>
-                                            <th>Nama Berkas</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td class="text-bold-500">Transkrip Pendidikan</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal" data-bs-target="#modaltranskrippendidikan">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold-500">Sertifikat Gelar Akademik</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal" data-bs-target="#modalsertifikat">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold-500">Surat Keputusan Pengangkatan</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#modalsuratkeputusanpengangkatan">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold-500">Publikasi Ilmiah</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal" data-bs-target="#modalpublikasiilmiah">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold-500">Kegiatan Pengembangan Diri</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal" data-bs-target="#modalkegiatanpengembangandiri">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold-500">Catatan Kinerja Mengajar</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal" data-bs-target="#modalcatatankinerjamengajar">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-bold-500">Laporan Penelitian</td>
-                                            <td>
-                                                <button type="button"
-                                                    class="btn icon icon-left btn-warning btn-sm rounded-pill"
-                                                    data-bs-toggle="modal" data-bs-target="#modallaporanpenelitian">
-                                                    <i data-feather="eye"></i>
-                                                    Lihat Berkas
-                                                </button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <div class="card-content">
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-lg">
+                                        <thead>
+                                            <tr>
+                                                <th>Berkas</th>
+                                                <th>Nama File</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Transkrip Pendidikan</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('transkrip_pendidikan')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('transkrip_pendidikan')->get() as $item)
+                                                            <p>{{ $item->transkrip_pendidikan }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->transkrip_pendidikan) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Sertifikat Gelar Akademik</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('sertifikat_gelar_akademik')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('sertifikat_gelar_akademik')->get() as $item)
+                                                            <p>{{ $item->sertifikat_gelar_akademik }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->sertifikat_gelar_akademik) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Surat Keputusan Pengangkatan</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('surat_keputusan_pengangkatan')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('surat_keputusan_pengangkatan')->get() as $item)
+                                                            <p>{{ $item->surat_keputusan_pengangkatan }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->surat_keputusan_pengangkatan) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Publikasi Ilmiah</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('publikasi_ilmiah')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('publikasi_ilmiah')->get() as $item)
+                                                            <p>{{ $item->publikasi_ilmiah }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->publikasi_ilmiah) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Kegiatan Pengembangan Diri</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('kegiatan_pengembangan_diri')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('kegiatan_pengembangan_diri')->get() as $item)
+                                                            <p>{{ $item->kegiatan_pengembangan_diri }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->kegiatan_pengembangan_diri) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Catatan Kinerja Mengajar</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('catatan_kinerja_mengajar')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('catatan_kinerja_mengajar')->get() as $item)
+                                                            <p>{{ $item->catatan_kinerja_mengajar }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->catatan_kinerja_mengajar) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Laporan Penelitian</strong></td>
+                                                <td>
+                                                    @if (count($detail->berkas()->whereNotNull('laporan_penelitian')->get()) > 0)
+                                                        @foreach ($detail->berkas()->whereNotNull('laporan_penelitian')->get() as $item)
+                                                            <p>{{ $item->laporan_penelitian }} <a
+                                                                    href="{{ asset('storage/file-berkas/' . $item->laporan_penelitian) }}"
+                                                                    target="_blank"><u>lihat</u></a></p>
+                                                        @endforeach
+                                                    @else
+                                                        <code>Data belum tersedia.</code>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -194,297 +330,4 @@
             </div>
         </section>
     </div>
-
-    {{-- modal --}}
-    <div class="modal fade" id="exampleModalScrollable" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalScrollableTitle">Tambah Data</h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="{{ url('update/' . Auth::user()->id) }}" method="post">
-                        @csrf
-                        {{-- <div class="form-group">
-                        <label for="name" class="form-label">Nama Lengkap</label>
-                        <input type="text" name="name" id="name" class="form-control" placeholder="Nama Lengkap" value="{{ Auth::user()->name }}">
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="{{ Auth::user()->email }}">
-                    </div> --}}
-                        <input type="number" name="progress" value="50" hidden>
-                        <div class="form-group">
-                            <label for="phone" class="form-label">Gelar Akademik</label>
-                            <input type="text" name="gelar_akademik" id="phone" class="form-control"
-                                placeholder="Gelar Akademik" value="">
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Bidang Keahlian</label>
-                            <textarea class="form-control" name="bidang_keahlian" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Bidang Keahlian"></textarea>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Riwayat Pendidikan</label>
-                            <textarea class="form-control" name="riwayat_pendidikan" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Riwayat Pendidikan"></textarea>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Pengalaman Mengajar</label>
-                            <textarea class="form-control" name="pengalaman_mengajar" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Pengalaman Mengajar"></textarea>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Publikasi Ilmiah</label>
-                            <textarea class="form-control" name="publikasi_ilmiah" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Publikasi Ilmiah"></textarea>
-                        </div>
-                        <div class="form-group mb-3">
-                            <label for="exampleFormControlTextarea1" class="form-label">Aktivitas Penelitian</label>
-                            <textarea class="form-control" name="aktivitas_penelitian" id="exampleFormControlTextarea1" rows="3"
-                                placeholder="Aktivitas Penelitian"></textarea>
-                        </div>
-                        <div class="form-group d-flex justify-content-end">
-                            <button type="submit" class="btn btn-primary">Update Biodata</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{-- endmodal --}}
-
-    <!-- Modal transkrip pendidikan -->
-    <div class="modal fade" id="modaltranskrippendidikan" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Transkrip Pendidikan
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->transkrip_pendidikan) }}"
-                        height="700" width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal sertifikat --}}
-    <div class="modal fade" id="modalsertifikat" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Sertifikat Gelar Akademik
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->sertifikat_gelar_akademik) }}"
-                        height="700" width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal surat keputusan pengangkatan --}}
-    <div class="modal fade" id="modalsuratkeputusanpengangkatan" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Surat Keputusan Pengangkatan
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->surat_keputusan_pengangkatan) }}"
-                        height="700" width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Publikasi Ilmiah --}}
-    <div class="modal fade" id="modalpublikasiilmiah" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Publikasi Ilmiah
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->publikasi_ilmiah) }}" height="700"
-                        width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Kegiatan Pengembangan Diri --}}
-    <div class="modal fade" id="modalkegiatanpengembangandiri" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Kegiatan Pengembangan Diri
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->kegiatan_pengembangan_diri) }}"
-                        height="700" width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Catatan Kinerja Mengajar --}}
-    <div class="modal fade" id="modalcatatankinerjamengajar" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Catatan Kinerja Mengajar
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->catatan_kinerja_mengajar) }}"
-                        height="700" width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- Modal Laporan Penelitian --}}
-    <div class="modal fade" id="modallaporanpenelitian" tabindex="-1" role="dialog"
-        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-centered modal-dialog-scrollable" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalCenterTitle">Laporan Penelitian
-                    </h5>
-                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
-                        <i data-feather="x"></i>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <iframe src="{{ asset('storage/berkas/' . $user->berkas->laporan_penelitian) }}"
-                        height="700" width="100%" frameborder="0" scrolling="auto"></iframe>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-light-secondary" data-bs-dismiss="modal">
-                        <i class="bx bx-x d-block d-sm-none"></i>
-                        <span class="d-none d-sm-block">Close</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    {{-- <div class="card-body">
-        <form action="{{ url('update/' . Auth::user()->id) }}" method="post">
-            @csrf
-            <div class="form-group">
-            <label for="name" class="form-label">Nama Lengkap</label>
-            <input type="text" name="name" id="name" class="form-control" placeholder="Nama Lengkap" value="{{ Auth::user()->name }}">
-        </div>
-        <div class="form-group">
-            <label for="email" class="form-label">Email</label>
-            <input type="text" name="email" id="email" class="form-control" placeholder="Email" value="{{ Auth::user()->email }}">
-        </div>
-            <input type="number" name="progress" value="50" hidden>
-            <div class="form-group">
-                <label for="phone" class="form-label">Gelar Akademik</label>
-                <input type="text" name="gelar_akademik" id="phone" class="form-control"
-                    placeholder="Gelar Akademik" value="">
-            </div>
-            <div class="form-group mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Bidang Keahlian</label>
-                <textarea class="form-control" name="bidang_keahlian" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Bidang Keahlian"></textarea>
-            </div>
-            <div class="form-group mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Riwayat Pendidikan</label>
-                <textarea class="form-control" name="riwayat_pendidikan" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Riwayat Pendidikan"></textarea>
-            </div>
-            <div class="form-group mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Pengalaman Mengajar</label>
-                <textarea class="form-control" name="pengalaman_mengajar" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Pengalaman Mengajar"></textarea>
-            </div>
-            <div class="form-group mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Publikasi Ilmiah</label>
-                <textarea class="form-control" name="publikasi_ilmiah" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Publikasi Ilmiah"></textarea>
-            </div>
-            <div class="form-group mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Aktivitas Penelitian</label>
-                <textarea class="form-control" name="aktivitas_penelitian" id="exampleFormControlTextarea1" rows="3"
-                    placeholder="Aktivitas Penelitian"></textarea>
-            </div>
-            <div class="form-group d-flex justify-content-end">
-                <button type="submit" class="btn btn-primary">Update Biodata</button>
-            </div>
-        </form>
-    </div> --}}
 @endsection

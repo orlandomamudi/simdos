@@ -104,8 +104,17 @@ class StaffController extends Controller
     }
 
     public function detail($id) {
-        $user = User::with('biodata', 'berkas')->where('id', '=', $id)->first();
-        return view('staff.detail', compact('user'));
+        $detail = User::with('biodata')->where('id', '=', $id)->first();
+        $pendidikan_pengajaran = $detail->biodata()->whereNotNull('pendidikan_pengajaran')->get();
+        $pengabdian = $detail->biodata()->whereNotNull('pengabdian')->get();
+        $penunjang = $detail->biodata()->whereNotNull('penunjang')->get();
+        $gelar_akademik = $detail->biodata()->whereNotNull('gelar_akademik')->get();
+        $bidang_keahlian = $detail->biodata()->whereNotNull('bidang_keahlian')->get();
+        $riwayat_pendidikan = $detail->biodata()->whereNotNull('riwayat_pendidikan')->get();
+        $pengalaman_mengajar = $detail->biodata()->whereNotNull('pengalaman_mengajar')->get();
+        $publikasi_ilmiah = $detail->biodata()->whereNotNull('publikasi_ilmiah')->get();
+        $aktivitas_penelitian = $detail->biodata()->whereNotNull('aktivitas_penelitian')->get();
+        return view('staff.detail', compact('detail', 'pendidikan_pengajaran', 'pengabdian', 'penunjang', 'gelar_akademik', 'bidang_keahlian', 'riwayat_pendidikan', 'pengalaman_mengajar', 'publikasi_ilmiah', 'aktivitas_penelitian'));
     }
 
     public function cetak($id) {
